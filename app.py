@@ -478,7 +478,14 @@ button#clear-cache:hover, button#output-folder:hover {
 """
 
 js = """
-
+    function refresh() {
+        const url = new URL(window.location);
+    
+        if (url.searchParams.get('__theme') !== 'dark') {
+            url.searchParams.set('__theme', 'dark');
+            window.location.href = url.href;
+        }
+    }
 """
 
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
