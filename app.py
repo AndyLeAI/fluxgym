@@ -448,7 +448,19 @@ button#clear-cache:hover {
     font-weight:normal;
     color: red; /* Đổi màu chữ thành màu đỏ */
 }
+.logo-and-text {
+    display: flex;
+    justify-content: center; /* Canh giữa logo và text theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa logo và text */
+    margin: 0 auto; /* Căn giữa toàn bộ khối */
+    text-align: center;
+}
 
+.text h1, .text h3 {
+    margin: 0;
+    text-align: center; /* Đảm bảo text được canh giữa */
+}
 """
 
 js = """
