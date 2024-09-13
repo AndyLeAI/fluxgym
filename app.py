@@ -478,14 +478,7 @@ button#clear-cache:hover, button#output-folder:hover {
 """
 
 js = """
-    function refresh() {
-        const url = new URL(window.location);
     
-        if (url.searchParams.get('__theme') !== 'dark') {
-            url.searchParams.set('__theme', 'dark');
-            window.location.href = url.href;
-        }
-    }
 """
 
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
@@ -493,7 +486,7 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     with gr.Row():
         gr.HTML("""
             <div class="logo-and-text">
-                <img id='logo' src='/file=icon_dark.png' width='80' height='80'>
+                <img id='logo' src='/file=icon.png' width='80' height='80'>
                 <div class="text">
                     <h1>LoRA Ease for FLUX  🦟 🦟 🦟</h1>
                     <h3>Train a high quality FLUX LoRA in a breeze. Forked from FluxGym by Andy N Le ༄</h3>
