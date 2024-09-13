@@ -492,7 +492,7 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
         """)   
     <div class='flexible'></div>
     <button id='autoscroll' class='on hidden'></button>
-</nav>
+
 """)
     with gr.Row(elem_id='container'):
         with gr.Column():
@@ -678,4 +678,4 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
 
 if __name__ == "__main__":
     cwd = os.path.dirname(os.path.abspath(__file__))
-    demo.launch(show_error=True, share=True)
+    demo.launch(inbrowser=True,show_error=True, allowed_paths=[cwd],share=True)
