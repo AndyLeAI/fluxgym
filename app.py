@@ -410,13 +410,13 @@ h1{font-family: georgia; font-style: italic; font-weight: bold; font-size: 30px;
 h3{margin-top: 0}
 .tabitem{border: 0px}
 .group_padding{}
-nav{position: fixed; top: 0; left: 0; right: 0; z-index: 1000; text-align: center; padding: 10px; box-sizing: border-box; display: flex; align-items: center; backdrop-filter: blur(10px); }
+nav{position: fixed; top: 0; left: 0; right: 0; z-index: 1000; text-align: center; padding: 10px; box-sizing: border-box; display: flex; align-items: center; backdrop-filter: none; }
 nav button { background: none; color: firebrick; font-weight: bold; border: 2px solid firebrick; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
 nav img { height: 40px; width: 40px; border-radius: 40px; }
 nav img.rotate { animation: rotate 2s linear infinite; }
 .flexible { flex-grow: 1; }
 .tast-details { margin: 10px 0 !important; }
-.toast-wrap { bottom: var(--size-4) !important; top: auto !important; border: none !important; backdrop-filter: blur(10px); }
+.toast-wrap { bottom: var(--size-4) !important; top: auto !important; border: none !important; backdrop-filter: none; }
 .toast-title, .toast-text, .toast-icon, .toast-close { color: black !important; font-size: 14px; }
 .toast-body { border: none !important; }
 #terminal { box-shadow: none !important; margin-bottom: 25px; background: rgba(0,0,0,0.03); }
@@ -425,6 +425,29 @@ nav img.rotate { animation: rotate 2s linear infinite; }
 #container { margin-top: 50px; }
 .hidden { display: none !important; }
 .codemirror-wrapper .cm-line { font-size: 12px !important; }
+button#clear-cache {
+    background-color: #515253; /* Màu nền cho nút */
+    color: white; /* Màu chữ */
+    border: none; /* Loại bỏ đường viền */
+    padding: 10px 20px; /* Khoảng cách giữa nội dung và cạnh nút */
+    text-align: center; /* Canh giữa nội dung nút */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Bo tròn góc nút */
+}
+
+button#clear-cache:hover {
+    background-color: #45a049; /* Đổi màu khi hover chuột */
+}
+#warning-text {
+    text-align: center; /* Canh giữa nội dung cảnh báo */
+    font-weight:normal;
+    color: red; /* Đổi màu chữ thành màu đỏ */
+}
+
 """
 
 js = """
@@ -458,8 +481,15 @@ function() {
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     output_components = []
     with gr.Row():
-        gr.HTML("""<nav>
-    <img id='logo' src='/file=icon.png' width='80' height='80'>
+        gr.HTML("""
+            <div class="logo-and-text">
+                <img id='logo' src='/file=icon.png' width='80' height='80'>
+                <div class="text">
+                    <h1>LoRA Ease for FLUX  🦟 🦟 🦟</h1>
+                    <h3>Train a high quality FLUX LoRA in a breeze. Forked from FluxGym by Andy N Le ༄</h3>
+                </div>
+            </div>
+        """)   
     <div class='flexible'></div>
     <button id='autoscroll' class='on hidden'></button>
 </nav>
