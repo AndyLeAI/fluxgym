@@ -411,7 +411,19 @@ h1{font-family: georgia; font-style: italic; font-weight: bold; font-size: 30px;
 h3{margin-top: 0}
 .tabitem{border: 0px}
 .group_padding{}
-nav{position: fixed; top: 0; left: 0; right: 0; z-index: 1000; text-align: center; padding: 10px; box-sizing: border-box; display: flex; align-items: center; backdrop-filter: none; }
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center; /* Căn giữa toàn bộ khối */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
 nav button { background: none; color: firebrick; font-weight: bold; border: 2px solid firebrick; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
 nav img { height: 40px; width: 40px; border-radius: 40px; }
 nav img.rotate { animation: rotate 2s linear infinite; }
@@ -454,7 +466,6 @@ button#clear-cache:hover {
     align-items: center; /* Canh giữa theo chiều dọc */
     gap: 10px; /* Khoảng cách giữa logo và text */
     margin: 0 auto; /* Căn giữa toàn bộ khối */
-    text-align: center;
 }
 
 .text h1, .text h3 {
@@ -506,6 +517,7 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
             <button id='autoscroll' class='on hidden'></button>
         </nav>    
         """)
+
     with gr.Row(elem_id='container'):
         with gr.Column():
             gr.Markdown(
