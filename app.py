@@ -489,11 +489,9 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
                     <h3>Train a high quality FLUX LoRA in a breeze. Forked from FluxGym by Andy N Le ༄</h3>
                 </div>
             </div>
-        """)   
-    <div class='flexible'></div>
-    <button id='autoscroll' class='on hidden'></button>
-
-""")
+            <div class='flexible'></div>
+            <button id='autoscroll' class='on hidden'></button>
+        """)
     with gr.Row(elem_id='container'):
         with gr.Column():
             gr.Markdown(
