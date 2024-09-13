@@ -412,17 +412,13 @@ h3{margin-top: 0}
 .tabitem{border: 0px}
 .group_padding{}
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+    position: relative;
     display: flex;
-    justify-content: center; /* Căn giữa toàn bộ khối */
+    justify-content: center; /* Căn giữa logo và văn bản */
     align-items: center; /* Căn giữa theo chiều dọc */
     text-align: center;
     padding: 10px;
-    box-sizing: border-box;
+    width: 100%; /* Đảm bảo nav chiếm toàn bộ chiều ngang */
 }
 nav button { background: none; color: firebrick; font-weight: bold; border: 2px solid firebrick; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
 nav img { height: 40px; width: 40px; border-radius: 40px; }
@@ -505,7 +501,8 @@ function() {
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     output_components = []
     with gr.Row():
-        gr.HTML("""<nav>
+    gr.HTML("""
+        <nav>
             <div class="logo-and-text">
                 <img id='logo' src='/file=icon.png' width='80' height='80'>
                 <div class="text">
@@ -513,10 +510,9 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
                     <h3>Train a high quality FLUX LoRA in a breeze. Forked from FluxGym by Andy N Le ༄</h3>
                 </div>
             </div>
-            <div class='flexible'></div>
-            <button id='autoscroll' class='on hidden'></button>
-        </nav>    
-        """)
+        </nav>
+    """)
+
 
     with gr.Row(elem_id='container'):
         with gr.Column():
