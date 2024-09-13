@@ -1,5 +1,6 @@
 import os
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Tắt các cảnh báo của TensorFlow
 import sys
 import subprocess
 
@@ -481,7 +482,7 @@ function() {
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     output_components = []
     with gr.Row():
-        gr.HTML("""
+        gr.HTML("""<nav>
             <div class="logo-and-text">
                 <img id='logo' src='/file=icon.png' width='80' height='80'>
                 <div class="text">
@@ -491,6 +492,7 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
             </div>
             <div class='flexible'></div>
             <button id='autoscroll' class='on hidden'></button>
+        </nav>    
         """)
     with gr.Row(elem_id='container'):
         with gr.Column():
