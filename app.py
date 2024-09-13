@@ -411,15 +411,7 @@ h1{font-family: georgia; font-style: italic; font-weight: bold; font-size: 30px;
 h3{margin-top: 0}
 .tabitem{border: 0px}
 .group_padding{}
-nav {
-    position: relative;
-    display: flex;
-    justify-content: center; /* Căn giữa logo và văn bản */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    text-align: center;
-    padding: 10px;
-    width: 100%; /* Đảm bảo nav chiếm toàn bộ chiều ngang */
-}
+nav{position: fixed; top: 0; left: 0; right: 0; z-index: 1000; text-align: center; padding: 10px; box-sizing: border-box; display: flex; align-items: center; backdrop-filter: none; }
 nav button { background: none; color: firebrick; font-weight: bold; border: 2px solid firebrick; padding: 5px 10px; border-radius: 5px; font-size: 14px; }
 nav img { height: 40px; width: 40px; border-radius: 40px; }
 nav img.rotate { animation: rotate 2s linear infinite; }
@@ -434,7 +426,20 @@ nav img.rotate { animation: rotate 2s linear infinite; }
 #container { margin-top: 50px; }
 .hidden { display: none !important; }
 .codemirror-wrapper .cm-line { font-size: 12px !important; }
-button#clear-cache {
+.logo-and-text {
+    display: flex;
+    justify-content: center; /* Canh giữa logo và text theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    gap: 10px; /* Khoảng cách giữa logo và text */
+    margin: 0 auto; /* Căn giữa toàn bộ khối */
+    text-align: center;
+}
+
+.text h1, .text h3 {
+    margin: 0;
+    text-align: center; /* Đảm bảo text được canh giữa */
+}
+button#clear-cache, button#output-folder {
     background-color: #515253; /* Màu nền cho nút */
     color: white; /* Màu chữ */
     border: none; /* Loại bỏ đường viền */
@@ -448,7 +453,7 @@ button#clear-cache {
     border-radius: 5px; /* Bo tròn góc nút */
 }
 
-button#clear-cache:hover {
+button#clear-cache:hover, button#output-folder:hover {
     background-color: #45a049; /* Đổi màu khi hover chuột */
 }
 #warning-text {
@@ -456,53 +461,30 @@ button#clear-cache:hover {
     font-weight:normal;
     color: red; /* Đổi màu chữ thành màu đỏ */
 }
-.logo-and-text {
-    display: flex;
-    justify-content: center; /* Canh giữa logo và text theo chiều ngang */
-    align-items: center; /* Canh giữa theo chiều dọc */
-    gap: 10px; /* Khoảng cách giữa logo và text */
-    margin: 0 auto; /* Căn giữa toàn bộ khối */
+/* Thanh ngang trang trí */
+.divider {
+    border-top: 2px solid #D3D3D3; /* Đường kẻ ngang màu xám */
+    margin: 20px 0; /* Khoảng cách trên dưới */
+    text-align: center; /* Căn giữa nội dung văn bản */
 }
 
-.text h1, .text h3 {
-    margin: 0;
-    text-align: center; /* Đảm bảo text được canh giữa */
+.divider span {
+    background-color: white; /* Màu nền cho text, cùng màu nền trang web để nhìn nổi bật */
+    padding: 0 10px; /* Khoảng cách giữa chữ và đường kẻ */
+    color: #808080; /* Màu chữ xám */
+    font-weight: bold; /* Chữ đậm */
 }
+
 """
 
 js = """
-function() {
-    let autoscroll = document.querySelector("#autoscroll")
-    if (window.iidxx) {
-        window.clearInterval(window.iidxx);
-    }
-    window.iidxx = window.setInterval(function() {
-        let text=document.querySelector(".codemirror-wrapper .cm-line").innerText.trim()
-        let img = document.querySelector("#logo")
-        if (text.length > 0) {
-            autoscroll.classList.remove("hidden")
-            if (autoscroll.classList.contains("on")) {
-                autoscroll.textContent = "Autoscroll ON"
-                window.scrollTo(0, document.body.scrollHeight, { behavior: "smooth" });
-                img.classList.add("rotate")
-            } else {
-                autoscroll.textContent = "Autoscroll OFF"
-                img.classList.remove("rotate")
-            }
-        }
-    }, 500);
-    console.log("autoscroll", autoscroll)
-    autoscroll.addEventListener("click", (e) => {
-        autoscroll.classList.toggle("on")
-    })
-}
+
 """
 
 with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
     output_components = []
     with gr.Row():
-    gr.HTML("""
-        <nav>
+        gr.HTML("""
             <div class="logo-and-text">
                 <img id='logo' src='/file=icon.png' width='80' height='80'>
                 <div class="text">
@@ -510,8 +492,7 @@ with gr.Blocks(elem_id="app", theme=theme, css=css, fill_width=True) as demo:
                     <h3>Train a high quality FLUX LoRA in a breeze. Forked from FluxGym by Andy N Le ༄</h3>
                 </div>
             </div>
-        </nav>
-    """)
+        """)
 
 
     with gr.Row(elem_id='container'):
